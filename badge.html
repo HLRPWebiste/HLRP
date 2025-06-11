@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Profil</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    .badge {
+      display: inline-block;
+      background: crimson;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 15px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Willkommen auf HLRP!</h1>
+  <p id="email"></p>
+  <h3>🎖️ Deine Badges:</h3>
+  <div id="badges"></div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHh7pvrOZmOUmy0u6miNfLoimcxvI_r_I",
+      authDomain: "hlrp-94d63.firebaseapp.com",
+      databaseURL: "https://hlrp-94d63-default-rtdb.firebaseio.com",
+      projectId: "hlrp-94d63",
+      storageBucket: "hlrp-94d63.appspot.com",
+      messagingSenderId: "912351422477",
+      appId: "1:912351422477:web:451dd779b7f30c45034d44",
+      measurementId: "G-RBS9RBNDE2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        document.getElementById("email").textContent = "Eingeloggt als: " + user.email;
+
+        // Lade Badges aus Realtime Database
+        db.ref('users/' + user.uid + '/badges').once('value')
+          .then(snapshot => {
+            const badges = snapshot.val();
+            const badgeContainer = document.getElementById("badges");
+
+            if (badges) {
+              Object.keys(badges).forEach(key => {
+                if (badges[key]) {
+                  const span = document.createElement('span');
+                  span.className = 'badge';
+                  span.textContent = key;
+                  badgeContainer.appendChild(span);
+                }
+              });
+            } else {
+              badgeContainer.textContent = "Keine Badges gefunden.";
+            }
+          });
+
+      } else {
+        window.location.href = "login.html"; // falls nicht eingeloggt
+      }
+    });
+  </script>
+</body>
+</html>

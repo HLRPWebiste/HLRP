@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>HLRP Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #1a1a1a, #0e0e0e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+    }
+
+    .login-box {
+      background: #141414;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #ff4444;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px;
+      background: #1f1f1f;
+      border: 2px solid #333;
+      border-radius: 10px;
+      font-size: 14px;
+      color: white;
+    }
+
+    .input-group input:focus {
+      border-color: #ff4444;
+      outline: none;
+    }
+
+    .login-btn {
+      background: #ff4444;
+      color: white;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      background: #ff0000;
+    }
+
+    .small-link {
+      margin-top: 15px;
+      display: block;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .small-link:hover {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>🔐 Login bei HLRP</h2>
+    <form onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <input type="email" id="username" placeholder="E-Mail" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Passwort" required>
+      </div>
+      <button type="submit" class="login-btn">Einloggen</button>
+    </form>
+    <a href="register.html" class="small-link">Noch kein Konto? Registrierung folgt!</a>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHh7pvrOZmOUmy0u6miNfLoimcxvI_r_I",
+      authDomain: "hlrp-94d63.firebaseapp.com",
+      projectId: "hlrp-94d63",
+      storageBucket: "hlrp-94d63.firebasestorage.app",
+      messagingSenderId: "912351422477",
+      appId: "1:912351422477:web:451dd779b7f30c45034d44",
+      measurementId: "G-RBS9RBNDE2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          alert("✅ Willkommen bei HLRP, " + email + "!");
+          window.location.href = "badge.html";
+        })
+        .catch((error) => {
+          alert("❌ Login fehlgeschlagen: " + error.message);
+        });
+    }
+  </script>
+
+</body>
+</html>
