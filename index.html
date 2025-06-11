@@ -83,6 +83,79 @@
     <h1>HLRP Roblox</h1>
     <p>Willkommen auf unserem Roleplay-Server!</p>
   </header>
+    <!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live User Zähler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background: #121212;
+      color: #fff;
+    }
+    #userCount {
+      font-size: 5rem;
+      font-weight: bold;
+      color: crimson;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Momentan online:</h1>
+  <div id="userCount">0</div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <script>
+    // Deine Firebase Konfiguration hier reinsetzen:
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHh7pvrOZmOUmy0u6miNfLoimcxvI_r_I",
+      authDomain: "hlrp-94d63.firebaseapp.com",
+      databaseURL: "https://hlrp-94d63-default-rtdb.firebaseio.com",
+      projectId: "hlrp-94d63",
+      storageBucket: "hlrp-94d63.appspot.com",
+      messagingSenderId: "912351422477",
+      appId: "1:912351422477:web:451dd779b7f30c45034d44",
+      measurementId: "G-RBS9RBNDE2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const userCountDiv = document.getElementById('userCount');
+
+    // Ref für den User-Zähler
+    const usersRef = db.ref('liveUsers');
+
+    // Eine eindeutige ID für jeden User generieren (Session-ID)
+    const userId = Date.now() + '_' + Math.floor(Math.random() * 1000);
+
+    // User als online markieren
+    const userRef = usersRef.child(userId);
+    userRef.set(true);
+
+    // Wenn der User die Seite verlässt, wieder entfernen
+    window.addEventListener('beforeunload', () => {
+      userRef.remove();
+    });
+
+    // Live Updates vom User-Zähler abonnieren
+    usersRef.on('value', snapshot => {
+      const users = snapshot.val();
+      const count = users ? Object.keys(users).length : 0;
+      userCountDiv.textContent = count;
+    });
+  </script>
+
+</body>
+</html>
+    
 
   <nav>
     <a href="index.html">Startseite</a>
