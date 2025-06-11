@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HLRP Roblox</title>
+  <style>
+    /* Basics & Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    /* Animierter Hintergrund mit roten Linien */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,0,0,0.6) 11px,
+        rgba(255,0,0,0.6) 12px
+      );
+      animation: moveLines 5s linear infinite;
+      z-index: -1;
+    }
+    @keyframes moveLines {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
+    }
+
+    /* Navigation */
+    nav {
+      background: #1a1a1acc;
+      backdrop-filter: blur(5px);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(255,0,0,0.3);
+      flex-wrap: wrap;
+    }
+    nav h1 {
+      color: crimson;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav ul li a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+    }
+    nav ul li a:hover {
+      color: crimson;
+    }
+
+    /* Hauptbereich */
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Sektionen */
+    section {
+      margin-bottom: 4rem;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: crimson;
+      border-bottom: 2px solid crimson;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    section p {
+      line-height: 1.5;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    /* Team Grid (wie gehabt) */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .team-member {
+      background: #222;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255,0,0,0.3);
+    }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid crimson;
+      margin-bottom: 0.5rem;
+    }
+    .team-member h3 {
+      color: crimson;
+      margin-bottom: 0.2rem;
+    }
+    .team-member p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h1>HLRP Roblox</h1>
+    <ul>
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="regeln.html">Regeln</a></li>
+      <li><a href="ueberuns.html">Über uns</a></li>
+      <li><a href="team.html">Unser Team</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="UserLogin.html">Login</a></li>
+      <li><a href="Badge.html">Badge</a></li>
+      <!-- Weitere Links hier hinzufügen -->
+    </ul>
+  </nav>
+
+  <main>
+    <section id="welcome">
+      <h2>Willkommen bei HLRP Roblox</h2>
+      <p>Erlebe spannende Rollenspiel-Abenteuer mit unserer Community. Trete unserem Discord bei und sei immer auf dem neuesten Stand!</p>
+    </section>
+
+    <section id="discord">
+      <h2>Trete unserem Discord bei</h2>
+      <p><a href="https://discord.gg/deinlink" target="_blank" style="color: crimson; font-weight: bold;">Jetzt beitreten</a></p>
+    </section>
+
+    <section id="team">
+      <h2>Unser Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="team1.jpg" alt="Teammitglied 1" />
+          <h3>Max Mustermann</h3>
+          <p>Community Manager</p>
+        </div>
+        <div class="team-member">
+          <img src="team2.jpg" alt="Teammitglied 2" />
+          <h3>Lisa Beispiel</h3>
+          <p>Support</p>
+        </div>
+        <!-- Weitere Teammitglieder -->
+      </div>
+    </section>
+
+    <section id="events">
+      <h2>Events</h2>
+      <p>Bleib dran für spannende Events und Aktionen rund um HLRP Roblox!</p>
+    </section>
+
+    <section id="news">
+      <h2>News</h2>
+      <p>Hier findest du die neuesten Updates und Ankündigungen.</p>
+    </section>
+
+    <section id="support">
+      <h2>Support</h2>
+      <p>Bei Fragen und Problemen sind wir für dich da!</p>
+    </section>
+
+    <section id="kontakt">
+      <h2>Kontakt</h2>
+      <p>Schreib uns eine Nachricht oder melde dich im Discord.</p>
+    </section>
+  </main>
+
+</body>
+</html>
